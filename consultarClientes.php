@@ -11,6 +11,16 @@ require_once("controller/ControllerCadastro.php");
 	<script src="js/jquery.js"></script>
 	<script src="bootstrap/js/bootstrap.js"></script>
 	<!--<script src="js/funcoes.js"></script>-->
+	<script>
+		function confirmDelete(delUrl) {
+  			if (confirm("Deseja apagar o registro?")) {
+   				document.location = delUrl;
+   				//var url_string = "http://localhost/agendamento-mysql/" + delUrl;
+				//var url = new URL(url_string);
+				//var data = url.searchParams.get("id"); //pega o value
+	        }  
+		}
+	</script>
 	<title>SISTEMA DE AGENDAMENTO - CLIENTES</title>
 </head> 
 <body> 
@@ -51,7 +61,7 @@ require_once("controller/ControllerCadastro.php");
 						<tbody id="TableData">
 						<?php
 							$controller = new ControllerCadastro();
-							$resultado = $controller->listar();
+							$resultado = $controller->listar(0);
 							//print_r($resultado);
 							for($i=0;$i<count($resultado);$i++){ 
 						?>
@@ -62,25 +72,25 @@ require_once("controller/ControllerCadastro.php");
 									<td scope="col"><?php echo $resultado[$i]['data_contato']; ?></td>
 									<td scope="col"><?php echo $resultado[$i]['observacao']; ?></td>
 									<td scope="col">
-										<button type="button" class="btn btn-outline-primary" style="width: 72px;">Editar</button>
-										<button type="button" class="btn btn-outline-primary" style="width: 72px;">Excluir</button>
+										<button type="button" class="btn btn-outline-primary" onclick="location.href='editarClientes.php?id=<?php echo $resultado[$i]['id']; ?>'" style="width: 72px;">Editar</button>
+										<button type="button" class="btn btn-outline-primary" onclick="javascript:confirmDelete('excluirClientes.php?id=<?php echo $resultado[$i]['id']; ?>')" style="width: 72px;">Excluir</button>
 									</td>
 								</tr>
 						<?php
 							}
 						?>
 						</tbody>
-						<tr>
-							<td scope="row">Ben Almeida</td>
-							<td>(11)995921423</td>
-							<td>Celular</td>
-							<td>18/09/2021</td>
-							<td>ablubleble</td>
+						<!--<tr>
+							<td scope="row">Jeferson Roberto de Lima</td>
+							<td>(11)97665-0099</td>
+							<td>Google Meu Negócio</td>
+							<td>25/05/2021</td>
+							<td>Serviço agendado para 01/07/2021</td>
 							<td>
 								<button type="button" class="btn btn-outline-primary" style="width: 72px;">Editar</button>
 								<button type="button" class="btn btn-outline-primary" style="width: 72px;">Excluir</button>
 							</td>
-						</tr>
+						</tr>-->
 					</table>
 				</div>
 			</div>
